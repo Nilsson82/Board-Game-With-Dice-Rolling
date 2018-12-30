@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameControl : MonoBehaviour
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
 
+        player1.GetComponent<FollowThePath>().moveAllowed = true;
         player1.GetComponent<FollowThePath>().moveAllowed = true;
         player2.GetComponent<FollowThePath>().moveAllowed = false;
 
@@ -59,7 +61,8 @@ public class GameControl : MonoBehaviour
             whoWinsTextShadow.gameObject.SetActive(true);
             player1MoveText.gameObject.SetActive(false);
             player2MoveText.gameObject.SetActive(false);
-            //whoWinsTextShadow.GetComponent<Text>().text = "Player 1 Wins";
+
+            // WhoWinsText.GetComponent<Text>().text = "Player 1 Wins";
             gameOver = true;
         }
 
@@ -68,8 +71,16 @@ public class GameControl : MonoBehaviour
             whoWinsTextShadow.gameObject.SetActive(true);
             player1MoveText.gameObject.SetActive(false);
             player2MoveText.gameObject.SetActive(false);
-            //whoWinsTextShadow.GetComponent<Text>().text = "Player 2 Wins";
+           // WhoWinsText.GetComponent<Text>().text = "Player 2 Wins";
             gameOver = true;
+
+
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            
         }
     }
 
